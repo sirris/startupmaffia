@@ -13,56 +13,6 @@ class Network:
         # people =  dict {name, [other names]}
         self.bsm = load_workbook(path)[sheet]
 
-  # def count_from(self):
-  #   for row in self.bsm.rows[1:]:
-  #     from_type, from_name, edge_type, edge_name, to_type, to_name = [cell.value for cell in row]
-  #     self.counter.append(from_name)
-  #     self.name_group[from_name] = from_type
-  #
-  # def count_to(self):
-  #   for row in self.bsm.rows[1:]:
-  #     from_type, from_name, edge_type, edge_name, to_type, to_name = [cell.value for cell in row]
-  #     self.counter.append(to_name)
-  #     self.name_group[to_name] = to_type
-  #
-  # def count(self):
-  #   self.values = collections.Counter(self.counter)
-  #
-  # def give_id(self):
-  #   i = 0
-  #   for row in self.bsm.rows[1:]:
-  #     from_type, from_name, edge_type, edge_name, to_type, to_name = [cell.value for cell in row]
-  #     for name in [from_name, to_name]:
-  #       if not name in self.name_id:
-  #         i += 1
-  #         self.name_id[name] = i
-  #
-  # def set_nodes(self):
-  #   for name in self.name_id:
-  #     node1 = {"id": self.name_id[name],
-  #              "label": name,
-  #              "title": name,
-  #              "group": self.name_group[name],
-  #              "value": self.values[name]
-  #             }
-  #     self.nodes.append(node1)
-  #
-  # def set_edges(self):
-  #   for row in self.bsm.rows[1:]:
-  #     from_type, from_name, edge_type, edge_name, to_type, to_name = [cell.value for cell in row]
-  #     for name in [from_name, to_name]:
-  #       edge = {"from": self.name_id[from_name],
-  #               "to": self.name_id[to_name]
-  #               }
-  #       self.edges.append(edge)
-  #
-  # def write_to(self):
-  #   with open("report/nodes.js", "w") as f:
-  #     f.write("var nodesraw = " + dumps(self.nodes, indent=2) + ";")
-  #
-  #   with open("report/edges.js", "w") as f:
-  #     f.write("var edgesraw = " + dumps(self.edges, indent=2) + ";")
-
     def write_to_file(self):
         maffia = []
         for name, connections in self.people.iteritems():
@@ -84,7 +34,11 @@ class Network:
     def run(self):
         for row in self.bsm.rows[1:]:
             from_type, from_name, edge_type, edge_name, to_type, to_name = [cell.value for cell in row]
-            self.add_connection(from_name, to_name)
+            from_name = from_name.replace('.','')
+            to_name = to_name.replace('.','')
+            self.add_connection('%s.%s' % (from_type,from_name), '%s.%s' % (to_type,to_name))
+            #self.add_connection(from_name, to_name)
+
 
 
 if __name__ == "__main__":
