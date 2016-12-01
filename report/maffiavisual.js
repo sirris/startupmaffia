@@ -27,6 +27,10 @@ var link = svg.append("g").selectAll(".link"),
 
 var originalData;
 
+d3.select('#slider').call(d3.slider().axis(true).min(0).max(40).step(1).on("slide", function(evt, value) {
+   updateData(value);
+ }));
+
 d3.json("heb_network.json", function(error, classes) {
   if (error) throw error;
   originalData = classes;
@@ -125,8 +129,9 @@ function packageImports(nodes) {
   return imports;
 }
 
-function updateData() {
-    var classes = originalData.filter(function (x){ return x.imports.length > 10;})
+function updateData(value) {
+    console.log("value = " + value);
+    var classes = originalData.filter(function (x){ return x.imports.length > value;})
     var extras = [];
     classes.forEach(function (x){ x.imports.forEach(function(i){extras.push({name:i, imports:[]})})})
     classes = classes.concat(extras);
