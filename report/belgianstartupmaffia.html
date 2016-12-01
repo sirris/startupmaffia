@@ -2,6 +2,25 @@
 <meta charset="utf-8">
 <style>
 
+.wrapper {
+   width: 960px;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+ }
+
+h1 {text-align: center;}
+
+#footer {text-align: center;}
+#footer a {text-decoration: none;}
+
+#slider {
+     width: 50%;
+     margin-left: auto;
+     margin-right: auto;
+     margin-bottom: 50px;
+ }
+
 .node {
   font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #bbb;
@@ -49,9 +68,17 @@
 </style>
 <link rel="stylesheet" href="d3.slider.css" />
 <body>
-    <h1>Visual of the Belgian Startup Maffia</h1>
+    <div class="wrapper">
+    <h1>Visualization of the Belgian Startup Maffia</h1>
+    <p>Hover over the names on the graph to see their connections.<br>Use the slider to zoom in on people with higher numbers of connections.</p>
     <div id="slider"></div>
+    <div id="visual"></div>
+    <div id="footer">
+        Graph by <a target="_blank" href="https://twitter.com/nickboucart">@nickboucart</a>, based upon data meticulously collected by <a target="_blank" href="https://twitter.com/omohout">@omohout</a>, both working at <a target="_blank" href="http://www.sirris.be">Sirris</a>.
+    </div>
+</div>
 
 <script src="d3.v3.min.js"></script>
 <script src="d3.slider.js"></script>
 <script src="maffiavisual.js"></script>
+</body>

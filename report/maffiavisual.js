@@ -1,5 +1,5 @@
 
-var diameter = 960,
+var diameter = 800,
     radius = diameter / 2,
     innerRadius = radius - 120;
 
@@ -16,7 +16,7 @@ var line = d3.svg.line.radial()
     .radius(function(d) { return d.y; })
     .angle(function(d) { return d.x / 180 * Math.PI; });
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#visual").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
   .append("g")
@@ -130,7 +130,6 @@ function packageImports(nodes) {
 }
 
 function updateData(value) {
-    console.log("value = " + value);
     var classes = originalData.filter(function (x){ return x.imports.length > value;})
     var extras = [];
     classes.forEach(function (x){ x.imports.forEach(function(i){extras.push({name:i, imports:[]})})})
